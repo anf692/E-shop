@@ -32,11 +32,12 @@
           </div>
 
 
-          <div class="flex justify-between items-center mt-4 space-x-2">
-            <p-button label="Modifier" icon="pi pi-pencil" (onClick)="onUpdate(item)" class="p-button-sm p-button-success flex-1"/>
-            <p-button label="Supprimer" icon="pi pi-trash" (onClick)="onDelete(item)" class="p-button-sm p-button-danger flex-1"/>
-            <p-button label="Ajouter" icon="pi pi-shopping-cart" (onClick)="addToCart(item)" class="p-button-sm p-button-primary flex-1"/>
+          <div class="flex justify-between items-center mt-4 gap-4">
+            <p-button label="Modifier" icon="pi pi-pencil" (onClick)="onUpdate(item)" class="p-button-sm p-button-success w-1/3 hover:bg-green-700"/>
+            <p-button label="Supprimer" icon="pi pi-trash" (onClick)="onDelete(item)" class="p-button-sm p-button-danger w-1/3 hover:bg-red-700"/>
+            <p-button label="Ajouter" icon="pi pi-shopping-cart" (onClick)="addToCart(item)" class="p-button-sm p-button-primary w-1/3 hover:bg-blue-700"/>
           </div>
+          
         </div>
       </div>
     </ng-template>

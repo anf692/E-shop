@@ -1,18 +1,27 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-10" *ngFor="let item of card()">
-        <div class="card p-3 shadow-lg rounded">
-          <div class="card-body">
-            <img src="assets/images/{{item.image}}" alt="image du produit">
-            <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text"><strong>Prix :</strong> {{ item.price }}€</p>
-            <p class="card-text"><strong>Description :</strong> {{ item.description }}</p>
-
-            
-            <button class="p-button-sm p-button-primary" >Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <h3 class="text-center font-weight-bold my-3">Liste des produits dans le panier</h3>
+  <div class="flex">
+  <p><strong>Total :</strong> {{ totalPrice }} €</p>
+  <button class="btn btn-success mt-3 valid">✔ Valider le panier</button>
   </div>
-   
+    <div class="row">
+        <div class="col-md-10" *ngFor="let item of card()">
+            <div class="card p-3 shadow-lg rounded">
+                <div class="card-body">
+                    <img [src]="'assets/images/' + item.product.image" alt="image du produit">
+                    <h5 class="card-title">{{ item.product.name }}</h5>
+                    <p class="card-text"><strong>Prix :</strong> {{ item.product.price }}€</p>
+                    <p class="card-text"><strong>Description :</strong> {{ item.product.description }}</p>
+
+                    <div class="flex items-center space-x-2">
+                        <button class="p-button-sm p-button-secondary" (click)="decrement(item.product.id)">➖</button>
+                        <span class="text-lg font-semibold">{{ item.quantity }}</span>
+                        <button class="p-button-sm p-button-primary" (click)="increment(item.product.id)">➕</button>
+                    </div>
+
+                    <button class="p-button-sm p-button-danger mt-2 w-full" (click)="onDelete(item.product.id)">❌Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

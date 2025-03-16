@@ -13,19 +13,37 @@ import {of} from "rxjs";
   templateUrl: './panier.component.html',
   styleUrl: './panier.component.css'
 })
+
 export class PanierComponent implements OnInit {
   ProductsService : ProductsService = inject(ProductsService);
   card! : any
 
 ngOnInit () {
-   this.card = this.ProductsService.cart
+   this.card = this.ProductsService.cart;
+}
+
+//methode pour incrementer
+public increment(productId: number) {
+  this.ProductsService.incrementQuantity(productId);
+}
+
+//methode pour decrementer
+public decrement(productId: number) {
+  this.ProductsService.decrementQuantity(productId);
 }
 
 
+//methode pour le tottal des prix
+public get totalPrice(): number {
+  return this.ProductsService.getTotalPrice();
+}
 
-// delete(id:Number){
-//   this.ProductsService.delete(id).subscribe
-// }
+
+public onDelete(productId: number) {
+  this.ProductsService.removeFromCart(productId);
+}
+
+
   constructor(private router: Router) {
  }
 
