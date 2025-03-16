@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-10" *ngFor="let item of card()">
+        <div class="card p-3 shadow-lg rounded">
+          <div class="card-body">
+            <img src="assets/images/{{item.image}}" alt="image du produit">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text"><strong>Prix :</strong> {{ item.price }}€</p>
+            <p class="card-text"><strong>Description :</strong> {{ item.description }}</p>
+
+            
+            <button class="btn btn-danger w-100">Delete ♻</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   

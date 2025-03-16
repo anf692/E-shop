@@ -1,13 +1,14 @@
-<p-toolbar [style]="{ height: '100px' }">
+<p-toolbar [style]="{ height: '100px', 'background-color': 'blue', color: 'white' }">
     <div class="p-toolbar-group-start">
-        <img src="assets/icons/icon-72x72.png" alt="logo" />
+        <img src="assets/icons/logo-apd.png" alt="logo Apd5" />
     </div>
-    <div class="p-toolbar-group-center">
+    <div class="p-toolbar-group-center ">
         {{ title }}
     </div>
     <div class="p-toolbar-group-end">
+
         <i class="pi pi-shopping-cart btn-shopp" style="font-size: 2rem"
-         pBadge [value]="0" severity="danger"
+         pBadge [value]="card().length || 0" severity="danger"
          (click)="onCheckOut()"
          ></i>
     </div>
@@ -18,7 +19,7 @@
     <ng-template pTemplate>
         <div class="w-full">
             <app-panel-menu />
-        </div>
+        </div >
     </ng-template>
     <ng-template pTemplate>
         <div class="w-full app-content">

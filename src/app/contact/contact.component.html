@@ -1,0 +1,24 @@
+<p-card header="Contactez-nous">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="p-field">
+        <label for="email">Email</label><br>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <small *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="p-error"><br>
+          Email valide requis.
+        </small>
+      </div>
+  
+      <div class="p-field">
+        <label for="message">Message</label><br>
+        <textarea id="message" rows="5" pInputTextarea formControlName="message"></textarea>
+        <small *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched" class="p-error"><br>
+          Le message est obligatoire et doit contenir moins de 300 caractères.
+        </small>
+      </div>
+  
+      <p-button class="Envoyer" label="Envoyer" type="submit" [disabled]="contactForm.invalid"></p-button>
+    </form>
+  </p-card>
+  
+  <p-toast></p-toast>
+  

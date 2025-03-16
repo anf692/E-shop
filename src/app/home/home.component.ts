@@ -11,5 +11,5 @@ import { CardModule } from "primeng/card";
   imports: [CardModule, RouterLink, ButtonModule],
 })
 export class HomeComponent {
-  public readonly appTitle = "SDIAGNE SHOP";
+  public readonly appTitle = "APD SHOP";
 }

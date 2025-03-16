@@ -25,7 +25,6 @@ const emptyProduct: Product = {
   createdAt: 0,
   updatedAt: 0,
 };
-
 @Component({
   selector: "app-product-list",
   templateUrl: "./product-list.component.html",
@@ -35,8 +34,9 @@ const emptyProduct: Product = {
 })
 export class ProductListComponent implements OnInit {
 
-  constructor() {}
-  
+  constructor() {
+  }
+
   private readonly productsService = inject(ProductsService);
   public readonly products = this.productsService.products;
 
@@ -53,7 +53,6 @@ export class ProductListComponent implements OnInit {
     this.isDialogVisible = true;
     this.editedProduct.set(emptyProduct);
   }
-
   public onUpdate(product: Product) {
     this.isCreation = false;
     this.isDialogVisible = true;
@@ -80,4 +79,12 @@ export class ProductListComponent implements OnInit {
   private closeDialog() {
     this.isDialogVisible = false;
   }
+
+   // Méthode pour ajouter un produit au panier
+  public addToCart(product: Product): void {
+    this.productsService.addToCart(product);
+    // Optionnellement, afficher un message de succès ou mettre à jour l'interface
+    alert(`${product.name} ajouté au panier`);
+
+ }
 }

@@ -5,14 +5,17 @@ import { catchError, Observable, of, tap } from "rxjs";
 
 @Injectable({
     providedIn: "root"
-}) export class ProductsService {
+})
+export class ProductsService {
 
     private readonly http = inject(HttpClient);
     private readonly path = "/api/products";
-    
+
     private readonly _products = signal<Product[]>([]);
+    private readonly _cart = signal<Product[]>([]);  // Signal pour suivre les produits dans le panier
 
     public readonly products = this._products.asReadonly();
+    public readonly cart = this._cart.asReadonly();  // Accéder au panier
 
     public get(): Observable<Product[]> {
         return this.http.get<Product[]>(this.path).pipe(
@@ -50,5 +53,20 @@ import { catchError, Observable, of, tap } from "rxjs";
             }),
             tap(() => this._products.update(products => products.filter(product => product.id !== productId))),
         );
+    }
+
+    // Méthode pour ajouter un produit au panier
+    public addToCart(product: Product): void {
+        this._cart.update(cart => [...cart, product]);
+    }
+
+    // Méthode pour obtenir les produits dans le panier
+    public getCart(): Product[] {
+        return this._cart();
+    }
+
+    // Méthode pour supprimer un produit du panier
+    public removeFromCart(productId: number): void {
+        this._cart.update(cart => cart.filter(product => product.id !== productId));
     }
 }
