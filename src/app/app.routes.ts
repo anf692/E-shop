@@ -12,16 +12,19 @@ export const APP_ROUTES: Routes = [
   {
     path: 'panier' , component: PanierComponent ,title :'panier'
   },
+  
   {
     path: "products",
     loadChildren: () =>
       import("./products/products.routes").then((m) => m.PRODUCTS_ROUTES)
   },
-  { path: "", redirectTo: "home", pathMatch: "full" },
+
+    {
+     path: "", redirectTo: "home", pathMatch: "full" 
+    },
 
 
   {
-    path: "contact",
-    component: ContactComponent,
+    path: "contact", component: ContactComponent,
   },
 ];

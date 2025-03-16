@@ -1,51 +1,52 @@
-<h1 class="text-center">Liste des produits</h1>
-<p-button label="Créer produit" (onClick)="onCreate()" class="block text-center"/>
 
-<div class="card">
-  <p-dataView #dv [value]="products()" [rows]="5">
-    <ng-template pTemplate="list" let-products>
-      <div>
-        <div class="item" *ngFor="let item of products; let first = first">
-          <div>
-            <img src="assets/images/{{item.image}}" alt="">
-            <div>
-              <div>
-                <div>
-                  <div>{{ item.name }}</div>
-                  <div class="p-message-detail">
-                    <div>Categories: {{item.category}}</div>
-                    <div>Quantité: {{item.quantity}}</div>
-                    <div>date: {{item.createdAt | date}}</div>
-                    <div>Prix: {{item.price |  currency : 'EUR'}}</div>
+<h1 class="text-center text-4xl font-bold text-gray-800 my-6">🛍️ Liste des Produits</h1>
 
-                    <div class="btn">
-                      <p-button severity="success" label="Modifier" (onClick)="onUpdate(item)"/>
-                      <p-button class="btn_supprimer" label="Supprimer" (onClick)="onDelete(item)"/>
+<!-- Bouton de création centré -->
+<div class="flex justify-center mb-6">
+  <p-button label="Créer produit" icon="pi pi-plus" (onClick)="onCreate()" class="p-button-lg p-button-rounded p-button-primary shadow-md"/>
+</div>
 
-                      <!-- Bouton Ajouter au panier -->
-                      <p-button
-                        severity="info"
-                        label=" Ajouter "
-                        icon="pi pi-shopping-cart"
-                        (onClick)="addToCart(item)"
-                        class="btn"/>
-                    </div>
-                </div>
-              </div>
-            </div>
+
+<div class="container mx-auto p-6">
+  <p-dataView #dv [value]="products()" [layout]="'grid'" [rows]="6">
+    <ng-template pTemplate="grid" let-products>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div *ngFor="let item of products" class="bg-white p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          
+          <!-- Image du produit -->
+          <div class="relative w-full h-48 mb-4">
+            <img [src]="'assets/images/' + item.image" alt="{{ item.name }}" class="w-full h-full object-cover rounded-md">
+          </div>
+
+          <!-- Détails du produit -->
+          <div class="text-center">
+            <h3 class="text-lg font-semibold text-gray-900">{{ item.name }}</h3>
+            <p class="text-sm text-gray-500">{{ item.category }}</p>
+            <p class="text-gray-700 font-bold mt-2">{{ item.price | currency : 'EUR' }}</p>
+          </div>
+
+
+          <div class="mt-3 text-sm text-gray-600">
+            <p><strong>Quantité :</strong> {{ item.quantity }}</p>
+            <p><strong>Date :</strong> {{ item.createdAt | date }}</p>
+          </div>
+
+
+          <div class="flex justify-between items-center mt-4 space-x-2">
+            <p-button label="Modifier" icon="pi pi-pencil" (onClick)="onUpdate(item)" class="p-button-sm p-button-success flex-1"/>
+            <p-button label="Supprimer" icon="pi pi-trash" (onClick)="onDelete(item)" class="p-button-sm p-button-danger flex-1"/>
+            <p-button label="Ajouter" icon="pi pi-shopping-cart" (onClick)="addToCart(item)" class="p-button-sm p-button-primary flex-1"/>
           </div>
         </div>
       </div>
-    </div>
-  </ng-template>
-</p-dataView>
+    </ng-template>
+  </p-dataView>
+</div>
 
-<p-dialog [(visible)]="isDialogVisible"
-          [style]="{ width: '50vw' }"
-          header="Ajout/Edition produit">
+
+<p-dialog [(visible)]="isDialogVisible" [style]="{ width: '50vw' }" header="Ajout/Édition Produit">
   <app-product-form
       [product]="editedProduct()"
       (save)="onSave($event)"
       (cancel)="onCancel()"/>
 </p-dialog>
-</div>

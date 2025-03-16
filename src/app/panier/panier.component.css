@@ -45,4 +45,11 @@
     font-size: 1.2rem;
     font-weight: bold;
   }
-  
+  .p-button-sm{
+    padding: 10px 18px ;
+    color: white;
+    background-color: blue;
+  }
+  .p-button-sm:hover{
+    background-color: red;
+  }
