@@ -2,13 +2,17 @@ import {Component, inject, OnInit} from '@angular/core';
 import {ProductsService} from "../products/data-access/products.service";
 import {NgForOf} from "@angular/common";
 import {Router} from "@angular/router";
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 import {of} from "rxjs";
 
 @Component({
   selector: 'app-panier',
   standalone: true,
+  providers: [MessageService],
   imports: [
-    NgForOf
+    NgForOf,
+    ToastModule
   ],
   templateUrl: './panier.component.html',
   styleUrl: './panier.component.css'
@@ -16,6 +20,7 @@ import {of} from "rxjs";
 
 export class PanierComponent implements OnInit {
   ProductsService : ProductsService = inject(ProductsService);
+  private messageService = inject(MessageService);
   card! : any
 
 ngOnInit () {
@@ -43,9 +48,14 @@ public onDelete(productId: number) {
   this.ProductsService.removeFromCart(productId);
 }
 
+constructor(private router: Router) {
+}
 
-  constructor(private router: Router) {
- }
+public Valider(){
+  this.messageService.add({ severity: 'success', summary: 'Valider', detail: 'Commande envoyee avec succes' });
+  // alert("Commande envoyee avec succes")
+}
+
 
 
 }

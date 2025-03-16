@@ -1,8 +1,9 @@
 <div class="container">
   <h3 class="text-center font-weight-bold my-3">Liste des produits dans le panier</h3>
   <div class="flex">
-  <p><strong>Total :</strong> {{ totalPrice }} €</p>
-  <button class="btn btn-success mt-3 valid">✔ Valider le panier</button>
+    <p><strong>Total :</strong> {{ totalPrice }} €</p>
+    <p-toast position="top-right"></p-toast>
+    <button class="btn btn-success mt-3 valid" (click)="Valider()">✔ Valider le panier</button>
   </div>
     <div class="row">
         <div class="col-md-10" *ngFor="let item of card()">
